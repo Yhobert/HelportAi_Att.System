@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HelportAI Attendance System</title>
+
+  <!-- 🔗 External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>HelportAI Attendance System</h1>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+        <span class="tag">AI Generated</span>
+      </div>
+    </header>
+
+    <div class="controls">
+      <button id="startBtn" class="primary">Start camera</button>
+      <button id="stopBtn">Stop</button>
+      <label class="flex" title="Upload image to scan">
+        <input id="fileInput" type="file" accept="image/*">
+        <button>Scan image</button>
+      </label>
+      <select id="facingSelect" class="select">
+        <option value="environment">Rear (preferred)</option>
+        <option value="user">Front</option>
+      </select>
+      <button id="clearLog">Clear log</button>
+      <button id="exportCsv">Export CSV</button>
+    </div>
+
+    <div class="layout" style="margin-top:12px">
+      <section class="card">
+        <div class="preview-wrap">
+          <div style="position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:8px">
+            <video id="video" autoplay muted playsinline></video>
+            <canvas id="overlay" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none"></canvas>
+          </div>
+
+          <div class="scanner-info">
+            <div><strong id="lastResult">No QR detected yet</strong></div>
+            <div class="flex"><small id="status">Idle</small></div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:8px;align-items:center">
+            <label class="flex"><input id="soundToggle" type="checkbox"> Beep on scan</label>
+            <label class="flex"><input id="autoCopy" type="checkbox"> Auto-copy</label>
+            <label class="flex"><input id="autoOpen" type="checkbox"> Auto-open link</label>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong>Scan log</strong>
+          <small class="muted">Stored in localStorage</small>
+        </div>
+        <div id="log" class="log"></div>
+      </aside>
+    </div>
+
+    <footer>
+      Tips: Run this on a secure origin (https or localhost). Works best on Chrome / Edge.
+    </footer>
+  </div>
+
+  <audio id="beep" src="beep.mp3" preload="auto"></audio>
+
+  <!-- 🔗 External JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
